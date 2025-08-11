@@ -316,4 +316,37 @@ document.addEventListener('DOMContentLoaded', () => {
         gameClearScreen.style.display = "block";
         finalScoreClearElement.textContent = `あなたのスコアは ${score} 点です！`;
     }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (既存のコード) ...
+
+    // アップデート情報を表示するHTML要素を取得
+    const updateTextElement = document.getElementById("update-text");
+
+    // アップデート情報の内容を定義
+    const latestUpdate = {
+        date: "2025年8月11日",
+        version: "Ver. 1.1.0",
+        notes: [
+            "・TOEICモードと鬼畜モードの単語をさらに追加しました。",
+            "・軽微なバグを修正し、パフォーマンスを改善しました。",
+            "・ゲームクリア時のスコア表示を分かりやすくしました。"
+        ]
+    };
+
+    // ノート欄に情報を表示する関数
+    function showUpdateNotes() {
+        const notesHtml = latestUpdate.notes.map(note => `<li>${note}</li>`).join('');
+        updateTextElement.innerHTML = `
+            <strong>${latestUpdate.date} (${latestUpdate.version})</strong>
+            <ul>${notesHtml}</ul>
+        `;
+    }
+
+    // ページ読み込み時にアップデート情報を表示
+    showUpdateNotes();
+    
+    // ... (既存のコードの続き) ...
+});
+
 });
