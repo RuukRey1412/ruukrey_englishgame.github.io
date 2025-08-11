@@ -93,8 +93,39 @@ input:focus {
     font-size: 1.2rem;
 }
 
+/* スクロールコンテナのスタイル */
+#update-scroll-container {
+    max-height: 150px; /* スクロール可能な高さを設定 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
+    padding-right: 10px; /* スクロールバーのための余白 */
+}
+
 #update-notes p {
     color: #555;
     line-height: 1.5;
     font-size: 1rem;
+}
+
+/* ゲームコンテンツのコンテナ */
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ゲーム開始ボタンと問題表示のスタイルを調整 */
+#start-button {
+    margin-bottom: 20px;
+}
+
+#question-placeholder, #word, #part-of-speech {
+    margin: 5px 0;
+}
+
+/* 正しい答えの表示スタイル */
+#correct-answer {
+    font-size: 1.2rem;
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
 }
