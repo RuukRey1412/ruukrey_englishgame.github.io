@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英単語タイピングクイズゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="home-screen">
+    <h1>英単語クイズゲーム</h1>
+    <button id="normal-mode-button" data-mode="normal">句動詞モード</button>
+    <button id="toeic-mode-button" data-mode="toeic">鬼句動詞モード</button>
+    <button id="oni-mode-button" data-mode="oni">鬼畜モード</button>
+</div>
+
+<div id="game-screen" style="display: none;">
+    <h2 id="mode-title"></h2>
+    <button id="start-button">ゲームスタート</button>
+    <p id="question-placeholder">ここに問題が表示されます</p>
+    <p id="word"></p>
+    <p id="part-of-speech"></p>
+    <input type="text" id="input" disabled placeholder="答えを入力してください">
+    <p id="score">スコア: 0</p>
+    <p id="lives">ライフ: 3</p>
+    <p id="timer">残り時間: 25秒</p>
+</div>
+
+<div id="game-over-screen" style="display: none;">
+    <h2>ゲームオーバー</h2>
+    <p id="final-score"></p>
+    <button id="return-home-button">ホームに戻る</button>
+</div>
+
+<div id="game-clear-screen" style="display: none;">
+    <h2>ゲームクリア</h2>
+    <p id="final-score-clear"></p>
+    <button id="return-home-button-clear">ホームに戻る</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
