@@ -10,28 +10,33 @@
 
 <div id="home-screen">
     <h1>英単語クイズゲーム</h1>
-    <button id="normal-mode-button" data-mode="normal">ノーマルモード</button>
-    <button id="toeic-mode-button" data-mode="toeic">TOEICモード</button>
-    <button id="oni-mode-button" data-mode="oni">鬼畜モード</button>
-    
+    <button id="kiso-kudoushi-button" data-mode="kiso_kudoushi">基礎句動詞モード</button>
+    <button id="kichiku-kudoushi-button" data-mode="kichiku_kudoushi">鬼畜句動詞モード</button>
+    <button id="kichiku-eitan-button" data-mode="kichiku_eitan">鬼畜英単語モード</button>
+    <button id="toeic-500-mode-button" data-mode="toeic500">TOEIC500点レベル</button>
+    <button id="toeic-600-mode-button" data-mode="toeic600">TOEIC600点レベル</button>
+    <button id="toeic-700-mode-button" data-mode="toeic700">TOEIC700点レベル</button>
     <div id="update-notes">
         <h3>最新のアップデート情報</h3>
-        <p id="update-text">
-            2025年８月１１日：正式リリース。モードを一新して単語を追加。
-        </p>
+        <div id="update-scroll-container">
+            <p id="update-text">アップデート情報を取得中...</p>
+        </div>
     </div>
 </div>
 
 <div id="game-screen" style="display: none;">
     <h2 id="mode-title"></h2>
-    <button id="start-button">ゲームスタート</button>
-    <p id="question-placeholder">ここに問題が表示されます</p>
-    <p id="word"></p>
-    <p id="part-of-speech"></p>
-    <input type="text" id="input" disabled placeholder="答えを入力してください">
-    <p id="score">スコア: 0</p>
-    <p id="lives">ライフ: 3</p>
-    <p id="timer">残り時間: 25秒</p>
+    <div class="game-content">
+        <button id="start-button">ゲームスタート</button>
+        <p id="question-placeholder">ここに問題が表示されます</p>
+        <p id="word"></p>
+        <p id="part-of-speech"></p>
+        <input type="text" id="input" disabled placeholder="答えを入力してください">
+        <p id="correct-answer" style="display: none;"></p>
+        <p id="score">スコア: 0</p>
+        <p id="lives">ライフ: 3</p>
+        <p id="timer">残り時間: 25秒</p>
+    </div>
 </div>
 
 <div id="game-over-screen" style="display: none;">
