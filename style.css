@@ -74,3 +74,27 @@ input:focus {
     margin-top: 10px;
     color: #555;
 }
+
+/* アップデート情報欄のスタイル */
+#update-notes {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #e9e9e9;
+    border-radius: 8px;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#update-notes h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#update-notes p {
+    color: #555;
+    line-height: 1.5;
+    font-size: 1rem;
+}
