@@ -609,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timer;
     let selectedQuestions = [];
     let currentMode = '';
-    const delayBetweenQuestions = 1000; // 答え表示から次の問題までの待ち時間 (1秒)
+    const delayBetweenQuestions = 500; // 答え表示から次の問題までの待ち時間 (2秒)
 
     // HTML要素の取得
     const homeScreen = document.getElementById("home-screen");
@@ -634,11 +634,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateTextElement = document.getElementById("update-text");
     const correctAnswerElement = document.getElementById("correct-answer");
 
-    // アップデート情報
+    // アップデート情報    
     const latestUpdate = {
-        date: "2025年8月11日",
-        version: "Ver. 1.1.0",
+        date: "2025年8月12日",
+        version: "Ver. 1.1.1",
         notes: [
+            "・３回正解するとゲームオーバーになる不具合を修正",
+            "・次の問題に行くまでの時間を短縮 2s<<<0.5s",
+             "・正解したときの得点を変更しました。15<<<10",
+            "",
             "・正式リリースに伴い、一新しました。",
             "・「句動詞モード」「鬼畜句動詞モード」とTOIECの各レベル別モードを実装しました。",
             "・鬼畜モードを他モードと同じ仕様に変更。(以前の仕様にはいずれ戻します。)"
@@ -688,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- ゲームロジックの関数群 ---
-    
+
     // ゲーム全体をリセットしてホームに戻る
     function resetGame() {
         gameOverScreen.style.display = "none";
@@ -700,14 +704,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         resetGameUI();
     }
-    
+
     // ゲーム画面のUIを初期状態に戻す
     function resetGameUI() {
         score = 0;
         lives = 3;
         timeLeft = 25;
         currentQuestionIndex = 0;
-        
+        selectedQuestions = [];
+
         scoreElement.textContent = `スコア: ${score}`;
         livesElement.textContent = `ライフ: ${lives}`;
         timerElement.textContent = `残り時間: ${timeLeft}秒`;
@@ -725,7 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // ゲーム開始時の変数を設定
         score = 0;
         currentQuestionIndex = 0;
-        
+
         // モードによって初期設定を変える
         let questionCount = 5;
         if (currentMode === 'toeic500') {
@@ -745,9 +750,9 @@ document.addEventListener('DOMContentLoaded', () => {
             timeLeft = 25;
             questionCount = 5;
         }
-        
+
         selectedQuestions = getRandomQuestions(currentMode, questionCount);
-        
+
         // 問題数が足りない場合は処理を中断してホームに戻る
         if (selectedQuestions.length === 0) {
             alert("問題数が足りません。別のモードを選択してください。");
@@ -778,9 +783,15 @@ document.addEventListener('DOMContentLoaded', () => {
         correctAnswerElement.style.display = 'none';
         correctAnswerElement.textContent = '';
 
+        // 問題が尽きたら、新しい問題セットをロード
         if (currentQuestionIndex >= selectedQuestions.length) {
-            showGameClearScreen();
-            return;
+            selectedQuestions = getRandomQuestions(currentMode, 5);
+            currentQuestionIndex = 0;
+            // 問題リストが空の場合はゲームオーバー
+            if (selectedQuestions.length === 0) {
+                showGameOverScreen();
+                return;
+            }
         }
 
         const question = selectedQuestions[currentQuestionIndex];
@@ -835,23 +846,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleCorrectAnswer() {
         const timeSpent = (currentMode === 'toeic600' || currentMode === 'toeic700') ? 20 - timeLeft : 25 - timeLeft;
         if (timeSpent <= 5) {
-            score += 20;
+            score += 10;
         } else if (timeSpent <= 15) {
-            score += 15;
+            score += 10;
         } else {
             score += 10;
         }
         currentQuestionIndex++;
         updateUI();
 
-        if (currentQuestionIndex < selectedQuestions.length) {
-            setTimeout(() => {
-                showQuestion();
-                startTimer();
-            }, delayBetweenQuestions);
-        } else {
-            setTimeout(showGameClearScreen, delayBetweenQuestions);
-        }
+        setTimeout(() => {
+            showQuestion();
+            startTimer();
+        }, delayBetweenQuestions);
     }
 
     function handleIncorrectAnswer() {
@@ -866,14 +873,10 @@ document.addEventListener('DOMContentLoaded', () => {
             showGameOverScreen();
         } else {
             currentQuestionIndex++;
-            if (currentQuestionIndex < selectedQuestions.length) {
-                setTimeout(() => {
-                    showQuestion();
-                    startTimer();
-                }, delayBetweenQuestions);
-            } else {
-                setTimeout(showGameClearScreen, delayBetweenQuestions);
-            }
+            setTimeout(() => {
+                showQuestion();
+                startTimer();
+            }, delayBetweenQuestions);
         }
     }
 
